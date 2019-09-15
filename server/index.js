@@ -3,6 +3,19 @@ const bodyParser = require('body-parser');
 const WebSocket = require('ws');
 const http = require("http");
 
+const wss = new WebSocket.Server({ port: 3333 });
+
+wss.on('connection', function connection(ws) {
+	console.log('connected')
+  ws.on('message', function incoming(data) {
+  	console.log('receiving messages')
+  	console.log(data)
+  	ws.send(data);
+  });
+  ws.send('Message from server');
+});
+
+/* 
 const app = express();
 app.use(bodyParser.json({ extended: false }));
 
@@ -20,7 +33,7 @@ app.get('/api/feed', (req, res) => {
 	    req.app.wss.clients.forEach(function each(client) {
 	      if (client.readyState === WebSocket.OPEN) {
 	      	console.info(data)
-	        client.send(data);
+	        client.send('word: ' + data);
 	      }
 	    });
 	  });
@@ -30,3 +43,4 @@ app.get('/api/feed', (req, res) => {
 server.listen(3333, () =>
   console.log('Local server is running on localhost:3333')
 );
+*/
