@@ -2,6 +2,18 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const WebSocket = require('ws');
 const http = require("http");
+const Twit = require('twit')
+
+require('dotenv').config()
+
+var T = new Twit({
+  consumer_key: process.env.API_KEY,
+  consumer_secret: process.env.API_SECRET_KEY,
+  access_token: process.env.ACCESS_TOKEN,
+  access_token_secret: process.env.ACCESS_TOKEN_SECRET,
+  timeout_ms: 60*1000,
+  strictSSL: true,
+})
 
 const wss = new WebSocket.Server({ port: 3333 });
 
@@ -12,7 +24,9 @@ wss.on('connection', function connection(ws) {
   	console.log(data)
   	ws.send(data);
   });
-  ws.send('Message from server');
+  ws.send([{
+  	"message": "message from server"
+  }]);
 });
 
 /* 
