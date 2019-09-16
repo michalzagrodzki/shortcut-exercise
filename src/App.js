@@ -20,9 +20,6 @@ class App extends React.Component {
     this.websocket.send(JSON.stringify({
       content: this.state.input
     }));
-    this.setState({
-      message: [this.state.input, ...this.state.message]
-    });
   }
 
   handleFormChange(event) {
@@ -36,11 +33,12 @@ class App extends React.Component {
     this.websocket.onopen = () => {
       console.log('WebSocket Client Connected');
     }
-    this.websocket.onmessage = (message) => {
+    this.websocket.onmessage = (data) => {
+      const message = JSON.parse(data.data);
       console.log('Getting message from server');
-      console.log(message.data);
+      console.log(message);
       this.setState({
-        message: message.data
+        message: message.content
       });
     }
   }
