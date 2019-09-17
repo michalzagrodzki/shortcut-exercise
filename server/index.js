@@ -6,6 +6,11 @@ const Twit = require('twit')
 
 require('dotenv').config()
 
+const app = express();
+const server = http.createServer(app)
+
+const wss = new WebSocket.Server({ server });
+
 var T = new Twit({
   consumer_key: process.env.API_KEY,
   consumer_secret: process.env.API_SECRET_KEY,
@@ -15,19 +20,31 @@ var T = new Twit({
   strictSSL: true,
 })
 
-const wss = new WebSocket.Server({ port: 3333 });
+app.use(bodyParser.json({ extended: false }));
+
+const stream = T.stream('statuses/sample')
 
 wss.on('connection', function connection(ws) {
 	console.log('connected')
+
+	stream.on('tweet', function (tweet) {
+		console.log('printing tweet: ')
+		console.log(JSON.stringify(tweet))
+	  ws.send(
+	  	JSON.stringify(tweet)
+	  );
+	})
+
   ws.on('message', function incoming(data) {
   	console.log('receiving messages')
   	console.log(data)
   	ws.send(data);
   });
-  ws.send([{
-  	"message": "message from server"
-  }]);
 });
+
+server.listen(3333, () =>
+  console.log('Local server is running on localhost:3333')
+);
 
 /* 
 const app = express();
