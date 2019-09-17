@@ -4,7 +4,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      message: '',
+      messages: [],
       input: ''
     };
 
@@ -34,17 +34,17 @@ class App extends React.Component {
       console.log('WebSocket Client Connected');
     }
     this.websocket.onmessage = (data) => {
-      const message = JSON.parse(data.data);
       console.log('Getting message from server');
-      console.log(message);
+      const tweet = data.data
+      console.log(tweet);
       this.setState({
-        message: message.content
+        messages: [ tweet, ...this.state.messages]
       });
     }
   }
 
   render() {
-    const { message, input } = this.state;
+    const { messages, input } = this.state;
     return (
       <div className="App">
         <p>Message:</p>
@@ -52,7 +52,13 @@ class App extends React.Component {
           <input name="input" type="text" value={input} onChange={this.handleFormChange}/>
           <button>Send</button>
         </form>
-        <p>{ message }</p>
+        <ul>
+        { 
+          messages.map(message => 
+            <li>{ message }</li>
+          )
+        }
+        </ul>
       </div>
     );
   }
