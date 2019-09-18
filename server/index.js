@@ -39,10 +39,18 @@ wss1.on('connection', function connection(ws) {
 	})
 });
 
+wss1.on('close', function close() {
+	console.log('web socket twitter feed closed')
+});
+
 // stream for twitter subject feed
 wss2.on('connection', function connection(ws) {
   console.log('web socket subject feed connected')
 });
+
+wss2.on('close', function close() {
+	console.log('web socket subject feed closed')
+})
 
 server.on('upgrade', function upgrade(request, socket, head) {
   const pathname = request.url
