@@ -20,7 +20,8 @@ var T = new Twit({
   strictSSL: true,
 })
 
-const stream = T.stream('statuses/sample')
+const streamSample = T.stream('statuses/sample')
+const streamTopic = (topic) => T.stream('statuses/filter', { track: topic })
 
 const wss1 = new WebSocket.Server({ noServer: true });
 const wss2 = new WebSocket.Server({ noServer: true });
@@ -29,7 +30,7 @@ const wss2 = new WebSocket.Server({ noServer: true });
 wss1.on('connection', function connection(ws) {
   console.log('web socket twitter feed connected')
 
-	stream.on('tweet', function (tweet) {
+	streamSample.on('tweet', function (tweet) {
 		console.log('printing tweet: ')
 		console.log(JSON.stringify(tweet))
 	  ws.send(
@@ -45,6 +46,14 @@ wss1.on('close', function close() {
 // stream for twitter subject feed
 wss2.on('connection', function connection(ws) {
   console.log('web socket subject feed connected')
+
+  streamTopic('mango').on('tweet', function (tweet) {
+		console.log('printing tweet: ')
+		console.log(JSON.stringify(tweet))
+	  ws.send(
+	  	JSON.stringify(tweet)
+	  );
+	});
 });
 
 wss2.on('close', function close() {
@@ -58,7 +67,7 @@ server.on('upgrade', function upgrade(request, socket, head) {
     wss1.handleUpgrade(request, socket, head, function done(ws) {
       wss1.emit('connection', ws, request);
     });
-  } else if (pathname === '/') {
+  } else if (pathname === '/api/topic') {
     wss2.handleUpgrade(request, socket, head, function done(ws) {
       wss2.emit('connection', ws, request);
     });
