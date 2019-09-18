@@ -9,7 +9,7 @@ require('dotenv').config()
 const app = express();
 const server = http.createServer(app)
 
-const wss = new WebSocket.Server({ server });
+app.use(bodyParser.json({ extended: false }));
 
 var T = new Twit({
   consumer_key: process.env.API_KEY,
@@ -20,12 +20,15 @@ var T = new Twit({
   strictSSL: true,
 })
 
-app.use(bodyParser.json({ extended: false }));
-
 const stream = T.stream('statuses/sample')
 
-wss.on('connection', function connection(ws) {
-	console.log('connected')
+const wss1 = new WebSocket.Server({ noServer: true });
+const wss2 = new WebSocket.Server({ noServer: true });
+
+// stream for twitter feed, sample of 10% of tweets
+wss1.on('connection', function connection(ws) {
+  console.log('web socket twitter feed connected')
+	console.log(ws)
 
 	stream.on('tweet', function (tweet) {
 		console.log('printing tweet: ')
@@ -34,44 +37,30 @@ wss.on('connection', function connection(ws) {
 	  	JSON.stringify(tweet)
 	  );
 	})
+});
 
-  ws.on('message', function incoming(data) {
-  	console.log('receiving messages')
-  	console.log(data)
-  	ws.send(data);
-  });
+// stream for twitter subject feed
+wss2.on('connection', function connection(ws) {
+  console.log('web socket subject feed connected')
+});
+
+server.on('upgrade', function upgrade(request, socket, head) {
+  const pathname = request.url
+
+  if (pathname === '/api/feed') {
+    wss1.handleUpgrade(request, socket, head, function done(ws) {
+      wss1.emit('connection', ws, request);
+    });
+  } else if (pathname === '/') {
+    wss2.handleUpgrade(request, socket, head, function done(ws) {
+      wss2.emit('connection', ws, request);
+    });
+  } else {
+    socket.destroy();
+  }
+  
 });
 
 server.listen(3333, () =>
   console.log('Local server is running on localhost:3333')
 );
-
-/* 
-const app = express();
-app.use(bodyParser.json({ extended: false }));
-
-const server = http.createServer(app);
-
-const wss = new WebSocket.Server({ server });
-
-app.wss = wss
-
-app.get('/api/feed', (req, res) => {
-	console.log('server feed');
-	req.app.wss.once('connection', (ws) => {
-    console.info('connected:', req.app.wss.clients.size);
-    ws.on('message', function incoming(data) {
-	    req.app.wss.clients.forEach(function each(client) {
-	      if (client.readyState === WebSocket.OPEN) {
-	      	console.info(data)
-	        client.send('word: ' + data);
-	      }
-	    });
-	  });
-  });
-});
-
-server.listen(3333, () =>
-  console.log('Local server is running on localhost:3333')
-);
-*/
