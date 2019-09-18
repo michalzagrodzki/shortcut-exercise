@@ -28,7 +28,6 @@ const wss2 = new WebSocket.Server({ noServer: true });
 // stream for twitter feed, sample of 10% of tweets
 wss1.on('connection', function connection(ws) {
   console.log('web socket twitter feed connected')
-	console.log(ws)
 
 	stream.on('tweet', function (tweet) {
 		console.log('printing tweet: ')
@@ -36,7 +35,7 @@ wss1.on('connection', function connection(ws) {
 	  ws.send(
 	  	JSON.stringify(tweet)
 	  );
-	})
+	});
 });
 
 wss1.on('close', function close() {
