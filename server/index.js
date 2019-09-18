@@ -31,7 +31,6 @@ wss1.on('connection', function connection(ws) {
   console.log('web socket twitter feed connected')
 
 	streamSample.on('tweet', function (tweet) {
-		console.log('printing tweet: ')
 		console.log(JSON.stringify(tweet))
 	  ws.send(
 	  	JSON.stringify(tweet)
@@ -48,7 +47,6 @@ wss2.on('connection', function connection(ws) {
   console.log('web socket subject feed connected')
 
   streamTopic('mango').on('tweet', function (tweet) {
-		console.log('printing tweet: ')
 		console.log(JSON.stringify(tweet))
 	  ws.send(
 	  	JSON.stringify(tweet)
