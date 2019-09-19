@@ -12,7 +12,7 @@ class App extends React.Component {
     this.handleFormChange = this.handleFormChange.bind(this);
   }
 
-  websocket = new WebSocket('ws://localhost:3333');
+  websocket = new WebSocket('ws://localhost:3333/api/topic');
 
   postMessage (event) {
     event.preventDefault();
