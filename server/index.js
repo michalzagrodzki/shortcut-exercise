@@ -61,7 +61,7 @@ wss2.on('close', function close() {
 server.on('upgrade', function upgrade(request, socket, head) {
   const pathname = request.url
 
-  if (pathname === '/api/feed') {
+  if (pathname === '/api/stream') {
     wss1.handleUpgrade(request, socket, head, function done(ws) {
       wss1.emit('connection', ws, request);
     });

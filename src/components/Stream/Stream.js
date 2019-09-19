@@ -14,7 +14,7 @@ class Stream extends React.Component {
     };
   }
 
-  websocket = new WebSocket('ws://localhost:3333/api/topic');
+  websocket = new WebSocket('ws://localhost:3333/api/stream');
 
   componentDidMount() {
     this.setState({
