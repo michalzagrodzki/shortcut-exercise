@@ -11,6 +11,23 @@ class Main extends React.Component {
         message: ''
       }
     };
+    
+    this.postMessage = this.postMessage.bind(this);
+    this.handleFormChange = this.handleFormChange.bind(this);
+  }
+
+  postMessage (event) {
+    event.preventDefault();
+    console.log(this.state.input)
+    this.websocket.send(JSON.stringify({
+      content: this.state.input
+    }));
+  }
+
+  handleFormChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
   }
 
   componentDidMount() {
