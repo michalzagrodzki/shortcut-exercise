@@ -21,8 +21,6 @@ class Topic extends React.Component {
       title: 'Twitter Topic Stream',
     });
 
-    console.log(this.props.match.params.name) // topic :name prop
-
     this.websocket.onopen = () => {
       console.log('WebSocket Client Connected');
       this.websocket.send(this.props.match.params.name);
