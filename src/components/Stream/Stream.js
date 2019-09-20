@@ -26,7 +26,8 @@ class Stream extends React.Component {
     }
     this.websocket.onmessage = (data) => {
       console.log('Getting message from server');
-      const tweet = data.data
+      const tweetString = data.data
+      const tweet = JSON.parse(data.data)
       console.log(tweet);
       this.setState({
         tweets: [ tweet, ...this.state.tweets]
