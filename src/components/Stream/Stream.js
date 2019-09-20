@@ -49,7 +49,7 @@ class Stream extends React.Component {
           <div className="stream-column-section">
             { 
               tweets.map(tweet =>
-                <p>{ tweet.text }</p>
+                <p key={tweet.id}>{ tweet.text }</p>
               )
             }
           </div>
