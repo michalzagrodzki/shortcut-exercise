@@ -25,6 +25,7 @@ class Topic extends React.Component {
 
     this.websocket.onopen = () => {
       console.log('WebSocket Client Connected');
+      this.websocket.send(this.props.match.params.name);
     }
     this.websocket.onmessage = (data) => {
       const tweet = JSON.parse(data.data)

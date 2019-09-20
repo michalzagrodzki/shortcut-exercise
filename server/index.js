@@ -45,13 +45,14 @@ wss1.on('close', function close() {
 // stream for twitter subject feed
 wss2.on('connection', function connection(ws) {
   console.log('web socket subject feed connected')
-
-  streamTopic('mango').on('tweet', function (tweet) {
-		console.log(JSON.stringify(tweet))
-	  ws.send(
-	  	JSON.stringify(tweet)
-	  );
-	});
+  ws.on('message', function incoming(topic) {
+  	streamTopic(topic).on('tweet', function (tweet) {
+			console.log(JSON.stringify(tweet))
+		  ws.send(
+		  	JSON.stringify(tweet)
+		  );
+		});
+  })
 });
 
 wss2.on('close', function close() {
