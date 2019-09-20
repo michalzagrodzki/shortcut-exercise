@@ -7,21 +7,26 @@ class Main extends React.Component {
     super();
     this.state = {
       title: '',
+      searchInput: '',
+      search: {
+        button: 'Search'
+      },
       error: {
         message: ''
-      }
+      },
+
     };
-    
-    this.postMessage = this.postMessage.bind(this);
+
+    this.postSearch = this.postSearch.bind(this);
     this.handleFormChange = this.handleFormChange.bind(this);
   }
 
-  postMessage (event) {
+  postSearch (event) {
     event.preventDefault();
-    console.log(this.state.input)
-    this.websocket.send(JSON.stringify({
-      content: this.state.input
-    }));
+    console.log(this.state.searchInput);
+    this.setState({
+      searchInput: '',
+    });
   }
 
   handleFormChange(event) {
@@ -40,7 +45,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const { title } = this.state;
+    const { title, search, searchInput } = this.state;
     return (
       <div className="Main">
         <section>
@@ -49,7 +54,10 @@ class Main extends React.Component {
           </div>
         </section>
         <section>
-          
+           <form onSubmit={ this.postSearch }>
+            <input name="searchInput" type="text" value={searchInput} onChange={this.handleFormChange} placeholder="Please type your search word here" />
+            <button type="submit" value="Submit">{ search.button }</button>
+          </form>
         </section>
       </div>
     );
