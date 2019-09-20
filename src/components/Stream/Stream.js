@@ -25,7 +25,6 @@ class Stream extends React.Component {
       console.log('WebSocket Client Connected');
     }
     this.websocket.onmessage = (data) => {
-      console.log('Getting message from server');
       const tweetString = data.data
       const tweet = JSON.parse(data.data)
       console.log(tweet);
