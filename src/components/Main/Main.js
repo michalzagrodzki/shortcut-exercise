@@ -53,7 +53,7 @@ class Main extends React.Component {
             <h1>{ title }</h1>
           </div>
         </section>
-        <section>
+        <section className="main-search-section">
            <form onSubmit={ this.postSearch }>
             <input name="searchInput" type="text" value={searchInput} onChange={this.handleFormChange} placeholder="Please type your search word here" />
             <button type="submit" value="Submit">{ search.button }</button>
