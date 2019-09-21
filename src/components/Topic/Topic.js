@@ -1,4 +1,5 @@
 import React from 'react';
+import Tweet from './../Tweet/Tweet'
 
 import "./Topic.scss";
 
@@ -50,7 +51,7 @@ class Topic extends React.Component {
           <div className="topic-column-section">
             { 
               tweets.map(tweet =>
-                <p key={tweet.id}>{ tweet.text }</p>
+                <Tweet tweet={ tweet }/>
               )
             }
           </div>

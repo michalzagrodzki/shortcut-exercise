@@ -1,4 +1,5 @@
 import React from 'react';
+import Tweet from './../Tweet/Tweet'
 
 import "./Stream.scss";
 
@@ -49,7 +50,7 @@ class Stream extends React.Component {
           <div className="stream-column-section">
             { 
               tweets.map(tweet =>
-                <p key={tweet.id}>{ tweet.text }</p>
+                <Tweet tweet={ tweet }/>
               )
             }
           </div>
