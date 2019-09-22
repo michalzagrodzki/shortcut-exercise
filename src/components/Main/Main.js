@@ -24,6 +24,7 @@ class Main extends React.Component {
   postSearch (event) {
     event.preventDefault();
     console.log(this.state.searchInput);
+    this.props.history.push('/topic/' + this.state.searchInput);
     this.setState({
       searchInput: '',
     });
