@@ -26,5 +26,6 @@
 .stream-column-section {
 	display: flex;
 	flex-direction: column;
+	align-items: center;
   background-color: lighten(map-get($main-colors, "primary"), 15%);
 }
