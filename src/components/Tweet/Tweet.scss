@@ -1,0 +1,23 @@
+@import './../../assets/SCSS/colors.scss';
+@import './../../assets/SCSS/fonts.scss';
+
+.tweet-body-section {
+	display: flex;
+	background-color: map-get($basic-colors, "light");
+	margin-top: 30px;
+	margin-bottom: 30px;
+	width: 30vw;
+	padding: 30px;
+	border-radius: 5px;
+	box-shadow: 0 30px 60px -30px rgba(0,0,0,.45);
+
+	p {
+		color: map-get($font-basic-colors, "dark");
+		line-height: 1.4;
+		font: {
+      size: 18px;
+      weight: 400;
+      family: $font-secondary;
+    }
+	}
+}
