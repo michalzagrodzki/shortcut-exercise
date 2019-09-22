@@ -37,7 +37,7 @@ class Main extends React.Component {
 
   componentDidMount() {
     this.setState({
-      title: 'Welcome to Twitter stream',
+      title: 'Twitter stream',
     });
   }
 
