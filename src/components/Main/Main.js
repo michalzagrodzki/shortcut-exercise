@@ -9,7 +9,7 @@ class Main extends React.Component {
       title: '',
       searchInput: '',
       search: {
-        button: 'Search'
+        button: ''
       },
       error: {
         message: ''
@@ -39,6 +39,9 @@ class Main extends React.Component {
   componentDidMount() {
     this.setState({
       title: 'Twitter stream',
+      search: {
+        button: 'Search'
+      }
     });
   }
 
