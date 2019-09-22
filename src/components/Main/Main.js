@@ -24,10 +24,12 @@ class Main extends React.Component {
   postSearch (event) {
     event.preventDefault();
     console.log(this.state.searchInput);
-    this.props.history.push('/topic/' + this.state.searchInput);
-    this.setState({
-      searchInput: '',
-    });
+    if (this.state.searchInput.length > 0) {
+      this.props.history.push('/topic/' + this.state.searchInput);
+      this.setState({
+        searchInput: '',
+      });  
+    }
   }
 
   handleFormChange(event) {
