@@ -1,0 +1,30 @@
+@import './../../assets/SCSS/colors.scss';
+@import './../../assets/SCSS/fonts.scss';
+
+.topic-head-section {
+	display: flex;
+  background-color: map-get($main-colors, "primary");
+	height: 20vh;
+	justify-content: center;
+  align-items: center;
+
+	h1 {
+		color: map-get($font-basic-colors, "light");
+		text-transform: capitalize;
+		letter-spacing: -2px;
+		line-height: 0.95;
+		width: 30%;
+		text-align: center;
+		font: {
+      size: 45px;
+      weight: 900;
+      family: $font-primary;
+    }
+	}
+}
+
+.topic-column-section {
+	display: flex;
+	flex-direction: column;
+  background-color: lighten(map-get($main-colors, "primary"), 15%);
+}
