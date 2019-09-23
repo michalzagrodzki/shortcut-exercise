@@ -12,6 +12,10 @@ class Main extends React.Component {
         title: '',
         button: ''
       },
+      recommendation: {
+        title: '',
+        list: []
+      },
       searchInput: '',
       search: {
         button: ''
@@ -52,7 +56,30 @@ class Main extends React.Component {
       stream: {
         title: 'See what the world is talking about',
         button: 'Check now'
-      }
+      },
+      recommendation: {
+        title: 'Popular words on Twitter',
+        list: [
+          {
+            title: 'Happy'
+          },
+          {
+            title: 'Today'
+          },
+          {
+            title: 'People'
+          },
+          {
+            title: 'Thank'
+          },
+          {
+            title: 'Show'
+          },
+          {
+            title: 'Life'
+          }
+        ]
+      },
     });
   }
 
@@ -60,7 +87,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const { title, search, searchInput, stream } = this.state;
+    const { title, search, searchInput, stream, recommendation } = this.state;
     return (
       <div className="Main">
         <section>
@@ -79,6 +106,16 @@ class Main extends React.Component {
           <Link to="/stream">
             <button>{ stream.button }</button>
           </Link>
+        </section>
+        <section className="main-recommendations-section">
+          <h2>{ recommendation.title }</h2>
+          { 
+            recommendation.list.map((item, index) =>
+              <Link key={index} to={`/topic/${item.title}`}>
+                <p key={index}>{ item.title }</p>
+              </Link>
+            )
+          }
         </section>
       </div>
     );
