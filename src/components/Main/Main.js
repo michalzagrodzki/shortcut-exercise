@@ -108,14 +108,18 @@ class Main extends React.Component {
           </Link>
         </section>
         <section className="main-recommendations-section">
-          <h2>{ recommendation.title }</h2>
-          { 
-            recommendation.list.map((item, index) =>
-              <Link key={index} to={`/topic/${item.title}`}>
-                <p key={index}>{ item.title }</p>
-              </Link>
-            )
-          }
+          <div className="main-recommendations-container">
+            <h3>{ recommendation.title }</h3>
+            <div className="main-recommendations-list">
+              {
+                recommendation.list.map((item, index) =>
+                  <Link key={index} to={`/topic/${item.title}`}>
+                    <p key={index}>{ item.title }</p>
+                  </Link>
+                )
+              }
+            </div>
+          </div>
         </section>
       </div>
     );
