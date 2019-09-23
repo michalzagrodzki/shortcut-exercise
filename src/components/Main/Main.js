@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import "./Main.scss";
 
@@ -7,6 +8,10 @@ class Main extends React.Component {
     super();
     this.state = {
       title: '',
+      stream: {
+        title: '',
+        button: ''
+      },
       searchInput: '',
       search: {
         button: ''
@@ -43,6 +48,10 @@ class Main extends React.Component {
       title: 'Twitter stream',
       search: {
         button: 'Search'
+      },
+      stream: {
+        title: 'See what the world is talking about',
+        button: 'Check now'
       }
     });
   }
@@ -51,7 +60,7 @@ class Main extends React.Component {
   }
 
   render() {
-    const { title, search, searchInput } = this.state;
+    const { title, search, searchInput, stream } = this.state;
     return (
       <div className="Main">
         <section>
@@ -64,6 +73,12 @@ class Main extends React.Component {
             <input name="searchInput" type="text" value={searchInput} onChange={this.handleFormChange} placeholder="Please type your search word here" />
             <button type="submit" value="Submit">{ search.button }</button>
           </form>
+        </section>
+        <section className="main-stream-section">
+          <h2>{ stream.title }</h2>
+          <Link to="/stream">
+            <button>{ stream.button }</button>
+          </Link>
         </section>
       </div>
     );
