@@ -35,11 +35,12 @@ wss1.on('connection', function connection(ws) {
 	  ws.send(
 	  	JSON.stringify(tweet)
 	  );
-	});
-});
-
-wss1.on('close', function close() {
-	console.log('web socket twitter feed closed')
+	})
+  ws.on('close', function close() {
+    streamSample.stop();
+    console.log('web socket twitter feed closed')
+    wss1.close()
+  })
 });
 
 // stream for twitter subject feed
@@ -47,28 +48,27 @@ wss2.on('connection', function connection(ws) {
   console.log('web socket subject feed connected')
   ws.on('message', function incoming(topic) {
   	streamTopic(topic).on('tweet', function (tweet) {
-			console.log(JSON.stringify(tweet))
+			//console.log(JSON.stringify(tweet))
 		  ws.send(
 		  	JSON.stringify(tweet)
 		  );
 		});
   })
+  ws.on('close', function close() {
+    wss2.close()
+  })
 });
-
-wss2.on('close', function close() {
-	console.log('web socket subject feed closed')
-})
 
 server.on('upgrade', function upgrade(request, socket, head) {
   const pathname = request.url
 
   if (pathname === '/api/stream') {
     wss1.handleUpgrade(request, socket, head, function done(ws) {
-      wss1.emit('connection', ws, request);
+      wss1.emit('connection', ws, request, socket);
     });
   } else if (pathname === '/api/topic') {
     wss2.handleUpgrade(request, socket, head, function done(ws) {
-      wss2.emit('connection', ws, request);
+      wss2.emit('connection', ws, request, socket);
     });
   } else {
     socket.destroy();
