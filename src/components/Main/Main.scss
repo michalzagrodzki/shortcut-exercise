@@ -35,6 +35,8 @@
 
 	input {
 		color: map-get($font-basic-colors, "dark");
+    background-color: map-get($basic-colors, "light-blue");
+    border: none;
 		font: {
       size: 18px;
       weight: 400;
@@ -43,6 +45,25 @@
     padding: 12px 30px;
     width: 30vw;
     border-radius: 30px;
+
+    transition: {
+      duration: 0.3s;
+    }
+
+    &::placeholder {
+      color: darken(map-get($basic-colors, "light-blue"), 40%);
+      font: {
+        size: 18px;
+        weight: 300;
+        family: $font-secondary;
+      }
+    }
+
+    &:focus {
+      background-color: map-get($basic-colors, "light");
+      outline: none;
+      border: 1px solid map-get($main-colors, "secondary");
+    }
 	}
 
 	button {
@@ -52,9 +73,11 @@
 		margin: 0 15px 0 15px;
 		min-width: 12vw;
 		border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 		font: {
-      size: 18px;
-      weight: 700;
+      size: 16px;
+      weight: 400;
       family: $font-secondary;
     }
 
@@ -98,7 +121,7 @@
     color: map-get($main-colors, "secondary");
     padding: 10px;
     font: {
-      size: 18px;
+      size: 16px;
       weight: 400;
       family: $font-secondary;
     }
