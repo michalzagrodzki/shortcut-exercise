@@ -6,6 +6,10 @@
   background-color: map-get($main-colors, "primary");
   justify-content: center;
 
+  a {
+    text-decoration: none;
+  }
+
   p {
     color: map-get($font-basic-colors, "light");
     font: {
@@ -26,6 +30,7 @@
 
     &:hover {
       cursor: pointer;
+      color: map-get($main-colors, "secondary");
     }
   }
 }
