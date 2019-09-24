@@ -21,7 +21,7 @@ var T = new Twit({
 })
 
 const streamSample = T.stream('statuses/sample')
-const streamTopic = (topic) => T.stream('statuses/filter', { track: topic })
+let streamTopic
 
 const wss1 = new WebSocket.Server({ noServer: true });
 const wss2 = new WebSocket.Server({ noServer: true });
@@ -47,14 +47,18 @@ wss1.on('connection', function connection(ws) {
 wss2.on('connection', function connection(ws) {
   console.log('web socket subject feed connected')
   ws.on('message', function incoming(topic) {
-  	streamTopic(topic).on('tweet', function (tweet) {
-			//console.log(JSON.stringify(tweet))
+    streamTopic = T.stream('statuses/filter', { track: topic })
+  	streamTopic.on('tweet', function (tweet) {
+			console.log(JSON.stringify(tweet))
 		  ws.send(
 		  	JSON.stringify(tweet)
 		  );
 		});
   })
   ws.on('close', function close() {
+    streamTopic.stop();
+    streamTopic = undefined;
+    console.log('web socket twitter subject closed')
     wss2.close()
   })
 });
