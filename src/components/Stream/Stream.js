@@ -1,5 +1,6 @@
 import React from 'react';
 import Tweet from './../Tweet/Tweet'
+import Header from './../Header/Header'
 
 import "./Stream.scss";
 
@@ -27,20 +28,25 @@ class Stream extends React.Component {
     }
     this.websocket.onmessage = (data) => {
       const tweet = JSON.parse(data.data)
-      console.log(tweet);
+      // console.log(tweet);
       this.setState({
         tweets: [ tweet, ...this.state.tweets]
       });
-    }    
+    }
   }
 
   componentWillUnmount() {
+    this.websocket.close(1000, 'Closing stream connection');
+    this.websocket.onclose = () => {
+      console.log('closing stream in Stream');
+    }
   }
 
   render() {
     const { title, tweets } = this.state;
     return (
       <div className="Stream">
+        <Header />
         <section>
           <div className="stream-head-section">
             <h1>{ title }</h1>
