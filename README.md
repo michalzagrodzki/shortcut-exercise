@@ -1,68 +1,36 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# The Shortcut Coding Challenge
 
-## Available Scripts
+This project is technical exercise for Shortcut company.
+Project covers challenge named 'Streamin Twitter Tweets'
 
-In the project directory, you can run:
+## The Challenge:
 
-### `npm start`
+### Streaming Twitter Tweets
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+A client wants to build a web-based application (and relevant infrastructure) to stream Twitter tweets to end-users in real-time.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## How to run project
 
-### `npm test`
+In the project directory first run command: `yarn install`. This will install all dependencies of this project.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To test project please run command: `yarn test`. This command launches test runner and tests whether project passes tests.
 
-### `npm run build`
+Before running project you need to paste `API_KEY`, `API_SECRET_KEY`, `ACCESS_TOKEN` and `ACCESS_TOKEN_SECRET` values into `.env` file. You can also place those values right into `process.env`. To obtain those values please visit [Twitter Developer](https://developer.twitter.com/) website.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+To run project please run command: `yarn develop`. This command launches server and client of the project. Open [http://localhost:4000](http://localhost:4000) to view project in the browser.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Scope of exercise
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This project connects to Twitter stream API and retrieves tweets in realtime.
 
-### `npm run eject`
+User can view unfiltered stream by accessing [http://localhost:4000/stream](http://localhost:4000/stream), or use search to view stream for keyword. There is also available list of streams based on popular keywords.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+On serverside there is used [Express](https://www.npmjs.com/package/express) and Http to initialize server. To build connection between server and client there is used Websocket dependency [WS](https://www.npmjs.com/package/ws). For streaming tweets there is used [Twit](https://www.npmjs.com/package/twit) dependency.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+On clientside there is used [React](https://www.npmjs.com/package/react) through [Create-react-app](https://github.com/facebook/create-react-app) CLI to serve app for user. Routes are managed by [react-router-dom](https://github.com/facebook/create-react-app). Data from backend is served through browsers native Websocket. Styles are created through SCSS and they are processed by [node-sass](https://www.npmjs.com/package/node-sass).
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Testing is done through [Jest](https://www.npmjs.com/package/jest) test runner.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Summary
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Hope you will enjoy using this app as much as I enjoyed building it.
