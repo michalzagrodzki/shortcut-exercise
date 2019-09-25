@@ -1,7 +1,7 @@
 # The Shortcut Coding Challenge
 
 This project is technical exercise for Shortcut company.
-Project covers challenge named 'Streamin Twitter Tweets'
+Project covers challenge named **Streaming Twitter Tweets**.
 
 ## The Challenge:
 
