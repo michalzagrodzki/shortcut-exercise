@@ -1,0 +1,36 @@
+@import './../../assets/SCSS/colors.scss';
+@import './../../assets/SCSS/fonts.scss';
+
+.header-section {
+  display: flex;
+  background-color: map-get($main-colors, "primary");
+  justify-content: center;
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    color: map-get($font-basic-colors, "light");
+    font: {
+      size: 12px;
+      weight: 700;
+      family: $font-primary;
+    }
+    line-height: 1.3;
+    text-transform: capitalize;
+    letter-spacing: 2px;
+    text-decoration: none;
+    padding: {
+      top: 10px;
+      left: 20px;
+      right: 20px;
+      bottom: 10px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: map-get($main-colors, "secondary");
+    }
+  }
+}

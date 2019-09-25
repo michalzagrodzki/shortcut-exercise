@@ -1,0 +1,206 @@
+@import './../../assets/SCSS/colors.scss';
+@import './../../assets/SCSS/fonts.scss';
+
+.main-head-section {
+	display: flex;
+  background-color: map-get($main-colors, "primary");
+	height: 40vh;
+	justify-content: center;
+  align-items: center;
+
+	h1 {
+		color: map-get($font-basic-colors, "light");
+		text-transform: capitalize;
+		letter-spacing: -2px;
+		line-height: 0.95;
+		width: 30%;
+		text-align: center;
+		font: {
+      size: 65px;
+      weight: 900;
+      family: $font-primary;
+    }
+	}
+}
+
+.main-search-section {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-top: -25px;
+
+	form {
+		display: flex;
+	}
+
+	input {
+		color: map-get($font-basic-colors, "dark");
+    background-color: map-get($basic-colors, "light-blue");
+    border: none;
+		font: {
+      size: 18px;
+      weight: 400;
+      family: $font-secondary;
+    }
+    padding: 12px 30px;
+    width: 30vw;
+    border-radius: 30px;
+
+    transition: {
+      duration: 0.3s;
+    }
+
+    &::placeholder {
+      color: darken(map-get($basic-colors, "light-blue"), 40%);
+      font: {
+        size: 18px;
+        weight: 300;
+        family: $font-secondary;
+      }
+    }
+
+    &:focus {
+      background-color: map-get($basic-colors, "light");
+      outline: none;
+      border: 1px solid map-get($main-colors, "secondary");
+    }
+	}
+
+	button {
+		color: map-get($font-basic-colors, "light");
+		background-color: map-get($main-colors, "secondary");
+		border: none;
+		margin: 0 15px 0 15px;
+		min-width: 12vw;
+		border-radius: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+		font: {
+      size: 16px;
+      weight: 400;
+      family: $font-secondary;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+	}
+}
+
+.main-stream-section {
+	display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: map-get($basic-colors, "light");
+  height: 45vh;
+  margin-top: -27px;
+  padding-bottom: 25vh;
+
+  h2 {
+    color: map-get($font-basic-colors, "dark");
+    margin: 95px 0 30px 0;
+    text-transform: capitalize;
+    letter-spacing: -2px;
+    line-height: 0.9;
+    width: 30%;
+    text-align: center;
+    font: {
+      size: 50px;
+      weight: 500;
+      family: $font-primary;
+    }
+  }
+
+  button {
+    color: map-get($font-basic-colors, "light");
+    border: none;
+    min-width: 15vw;
+    border-radius: 30px;
+    border: 1px solid map-get($main-colors, "secondary");
+    color: map-get($main-colors, "secondary");
+    padding: 10px;
+    font: {
+      size: 16px;
+      weight: 400;
+      family: $font-secondary;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.main-recommendations-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: map-get($main-colors, "primary");
+}
+
+.main-recommendations-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30vw;
+  background-color: map-get($main-colors, "secondary");
+  padding: 10px;
+  margin: -130px 0 80px 0;
+  box-shadow: 0 30px 60px -30px rgba(0,0,0,.45);
+  border-radius: 5px;
+
+  h3 {
+    color: map-get($font-basic-colors, "light");
+    margin: 65px 0 55px 0;
+    letter-spacing: 1px;
+    line-height: 0.9;
+    width: 20vw;
+    text-align: center;
+    font: {
+      size: 40px;
+      weight: 300;
+      family: $font-primary;
+    }
+  }
+}
+
+.main-recommendations-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  a {
+    text-align: center;
+    text-decoration: none;
+    width: 40%;
+    border: 1px solid map-get($basic-colors, "light");
+    border-radius: 5px;
+    margin: 15px;
+
+    &:hover {
+      cursor: pointer;
+
+      p {
+        font: {
+          weight: 700;
+        }
+      }
+    }
+  }
+
+  p {
+    color: map-get($font-basic-colors, "light");
+    margin: 0;
+    letter-spacing: 5px;
+    line-height: 1;
+    text-align: center;
+    padding: 40px 0 40px 0;
+    font: {
+      size: 18px;
+      weight: 400;
+      family: $font-primary;
+    }
+  }
+}
