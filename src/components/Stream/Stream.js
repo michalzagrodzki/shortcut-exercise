@@ -43,7 +43,9 @@ class Stream extends React.Component {
   }
 
   render() {
+
     const { title, tweets } = this.state;
+    
     return (
       <div className="Stream">
         <Header />

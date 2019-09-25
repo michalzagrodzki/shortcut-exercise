@@ -4,12 +4,6 @@ import "./Tweet.scss";
 
 class Tweet extends React.Component {
 
-  componentDidMount() {
-  }
-
-  componentWillUnmount() {
-  }
-
   render() {
 
     let userImage;

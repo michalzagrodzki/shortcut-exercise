@@ -33,10 +33,7 @@ class Header extends React.Component {
       },
     });
   }
-
-  componentWillUnmount() {
-  }
-
+  
   render() {
     const { main, stream } = this.state;
     return (

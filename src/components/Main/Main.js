@@ -36,7 +36,7 @@ class Main extends React.Component {
     if (this.state.searchInput.length > 0) {
       this.props.history.push('/topic/' + this.state.searchInput);
       this.setState({
-        searchInput: '',
+        searchInput: ''
       });  
     }
   }
@@ -83,11 +83,10 @@ class Main extends React.Component {
     });
   }
 
-  componentWillUnmount() {
-  }
-
   render() {
+
     const { title, search, searchInput, stream, recommendation } = this.state;
+    
     return (
       <div className="Main">
         <section>

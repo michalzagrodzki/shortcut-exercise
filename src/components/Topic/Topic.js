@@ -44,7 +44,9 @@ class Topic extends React.Component {
   }
 
   render() {
+
     const { title, tweets } = this.state;
+    
     return (
       <div className="Topic">
         <Header />
