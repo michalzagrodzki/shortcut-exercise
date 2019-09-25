@@ -59,7 +59,7 @@ class Topic extends React.Component {
           <div className="topic-column-section">
             { 
               tweets.map(tweet =>
-                <Tweet tweet={ tweet }/>
+                <Tweet key={tweet.id_str} tweet={ tweet }/>
               )
             }
           </div>
