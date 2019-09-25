@@ -21,13 +21,13 @@ var T = new Twit({
 })
 
 const streamSample = T.stream('statuses/sample')
-let streamTopic
+let streamTrack
 
-const wss1 = new WebSocket.Server({ noServer: true });
-const wss2 = new WebSocket.Server({ noServer: true });
+const twitterStreamSocketServer = new WebSocket.Server({ noServer: true });
+const twitterTrackSocketServer = new WebSocket.Server({ noServer: true });
 
 // stream for twitter feed, sample of 10% of tweets
-wss1.on('connection', function connection(ws) {
+twitterStreamSocketServer.on('connection', function connection(ws) {
   console.log('web socket twitter feed connected')
 
 	streamSample.on('tweet', function (tweet) {
@@ -38,17 +38,17 @@ wss1.on('connection', function connection(ws) {
 	})
   ws.on('close', function close() {
     streamSample.stop();
+    twitterStreamSocketServer.close()
     console.log('web socket twitter feed closed')
-    wss1.close()
   })
 });
 
-// stream for twitter subject feed
-wss2.on('connection', function connection(ws) {
+// stream for twitter track feed
+twitterTrackSocketServer.on('connection', function connection(ws) {
   console.log('web socket subject feed connected')
   ws.on('message', function incoming(topic) {
-    streamTopic = T.stream('statuses/filter', { track: topic })
-  	streamTopic.on('tweet', function (tweet) {
+    streamTrack = T.stream('statuses/filter', { track: topic })
+  	streamTrack.on('tweet', function (tweet) {
 			console.log(JSON.stringify(tweet))
 		  ws.send(
 		  	JSON.stringify(tweet)
@@ -56,10 +56,10 @@ wss2.on('connection', function connection(ws) {
 		});
   })
   ws.on('close', function close() {
-    streamTopic.stop();
-    streamTopic = undefined;
-    console.log('web socket twitter subject closed')
-    wss2.close()
+    streamTrack.stop();
+    streamTrack = undefined;
+    twitterTrackSocketServer.close()
+    console.log('web socket twitter track closed')
   })
 });
 
@@ -67,12 +67,12 @@ server.on('upgrade', function upgrade(request, socket, head) {
   const pathname = request.url
 
   if (pathname === '/api/stream') {
-    wss1.handleUpgrade(request, socket, head, function done(ws) {
-      wss1.emit('connection', ws, request, socket);
+    twitterStreamSocketServer.handleUpgrade(request, socket, head, function done(ws) {
+      twitterStreamSocketServer.emit('connection', ws, request, socket);
     });
   } else if (pathname === '/api/topic') {
-    wss2.handleUpgrade(request, socket, head, function done(ws) {
-      wss2.emit('connection', ws, request, socket);
+    twitterTrackSocketServer.handleUpgrade(request, socket, head, function done(ws) {
+      twitterTrackSocketServer.emit('connection', ws, request, socket);
     });
   } else {
     socket.destroy();
