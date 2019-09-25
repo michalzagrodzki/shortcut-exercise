@@ -15,8 +15,8 @@ class Tweet extends React.Component {
     let userImage;
     let userName;
 
-    if (this.props.tweet.user.profile_image_url_https !== undefined) { userImage = <img src={ this.props.tweet.user.profile_image_url_https } alt="" />; }
-    if (this.props.tweet.user.name !== undefined) { userName = <h4>{ this.props.tweet.user.name }</h4>; }
+    if (this.props.tweet.user.profile_image_url_https !== undefined) { userImage = <img src={ this.props.tweet.user.profile_image_url_https } alt="" />; };
+    if (this.props.tweet.user.name !== undefined) { userName = <h4>{ this.props.tweet.user.name }</h4>; };
 
 
     return (

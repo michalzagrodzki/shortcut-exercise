@@ -1,6 +1,6 @@
 import React from 'react';
-import Tweet from './../Tweet/Tweet'
-import Header from './../Header/Header'
+import Tweet from './../Tweet/Tweet';
+import Header from './../Header/Header';
 
 import "./Stream.scss";
 
@@ -20,26 +20,26 @@ class Stream extends React.Component {
 
   componentDidMount() {
     this.setState({
-      title: 'Twitter Stream',
+      title: 'Twitter Stream'
     });
 
     this.websocket.onopen = () => {
       console.log('WebSocket Client Connected');
-    }
+    };
     this.websocket.onmessage = (data) => {
       const tweet = JSON.parse(data.data)
       // console.log(tweet);
       this.setState({
         tweets: [ tweet, ...this.state.tweets]
       });
-    }
+    };
   }
 
   componentWillUnmount() {
     this.websocket.close(1000, 'Closing stream connection');
     this.websocket.onclose = () => {
       console.log('closing stream in Stream');
-    }
+    };
   }
 
   render() {
