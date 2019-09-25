@@ -20,7 +20,7 @@ var T = new Twit({
   strictSSL: true,
 });
 
-const streamSample = T.stream('statuses/sample');
+let streamSample;
 let streamTrack;
 
 const twitterStreamSocketServer = new WebSocket.Server({ noServer: true });
@@ -29,7 +29,7 @@ const twitterTrackSocketServer = new WebSocket.Server({ noServer: true });
 // stream for twitter feed, sample of 10% of tweets
 twitterStreamSocketServer.on('connection', function connection(ws) {
   console.log('web socket twitter feed connected');
-
+  streamSample = T.stream('statuses/sample')
 	streamSample.on('tweet', function (tweet) {
 		console.log(JSON.stringify(tweet));
 	  ws.send(
@@ -38,6 +38,7 @@ twitterStreamSocketServer.on('connection', function connection(ws) {
 	});
   ws.on('close', function close() {
     streamSample.stop();
+    streamSample = undefined;
     twitterStreamSocketServer.close()
     console.log('web socket twitter feed closed')
   });
